@@ -1,0 +1,109 @@
+[2025-12-31 15:24:07 +0000] [1160] [INFO] Starting gunicorn 23.0.0
+[2025-12-31 15:24:07 +0000] [1160] [INFO] Listening at: http://0.0.0.0:8050 (1160)
+[2025-12-31 15:24:07 +0000] [1160] [INFO] Using worker: sync
+[2025-12-31 15:24:07 +0000] [1161] [INFO] Booting worker with pid: 1161
+[2025-12-31 15:24:07 +0000] [1162] [INFO] Booting worker with pid: 1162
+[2025-12-31 15:31:01 +0000] [1160] [CRITICAL] WORKER TIMEOUT (pid:1162)
+[2025-12-31 15:31:01 +0000] [1162] [ERROR] Error handling request (no URI read)
+Traceback (most recent call last):
+  File "/home/ubuntu/ExpenseTrackerDash/venv/lib/python3.12/site-packages/gunicorn/workers/sync.py", line 133, in handle
+    req = next(parser)
+          ^^^^^^^^^^^^
+  File "/home/ubuntu/ExpenseTrackerDash/venv/lib/python3.12/site-packages/gunicorn/http/parser.py", line 41, in __next__
+    self.mesg = self.mesg_class(self.cfg, self.unreader, self.source_addr, self.req_count)
+                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/ExpenseTrackerDash/venv/lib/python3.12/site-packages/gunicorn/http/message.py", line 259, in __init__
+    super().__init__(cfg, unreader, peer_addr)
+  File "/home/ubuntu/ExpenseTrackerDash/venv/lib/python3.12/site-packages/gunicorn/http/message.py", line 60, in __init__
+    unused = self.parse(self.unreader)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/ExpenseTrackerDash/venv/lib/python3.12/site-packages/gunicorn/http/message.py", line 271, in parse
+    self.get_data(unreader, buf, stop=True)
+  File "/home/ubuntu/ExpenseTrackerDash/venv/lib/python3.12/site-packages/gunicorn/http/message.py", line 262, in get_data
+    data = unreader.read()
+           ^^^^^^^^^^^^^^^
+  File "/home/ubuntu/ExpenseTrackerDash/venv/lib/python3.12/site-packages/gunicorn/http/unreader.py", line 36, in read
+    d = self.chunk()
+        ^^^^^^^^^^^^
+  File "/home/ubuntu/ExpenseTrackerDash/venv/lib/python3.12/site-packages/gunicorn/http/unreader.py", line 63, in chunk
+    return self.sock.recv(self.mxchunk)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/ubuntu/ExpenseTrackerDash/venv/lib/python3.12/site-packages/gunicorn/workers/base.py", line 204, in handle_abort
+    sys.exit(1)
+SystemExit: 1
+[2025-12-31 15:31:01 +0000] [1162] [INFO] Worker exiting (pid: 1162)
+[2025-12-31 15:31:01 +0000] [1194] [INFO] Booting worker with pid: 1194
+[2025-12-31 15:39:13 +0000] [1160] [ERROR] Worker (pid:1161) was sent SIGKILL! Perhaps out of memory?
+[2025-12-31 15:39:13 +0000] [1249] [INFO] Booting worker with pid: 1249
+[2025-12-31 16:01:06 +0000] [1160] [ERROR] Worker (pid:1249) was sent SIGKILL! Perhaps out of memory?
+[2025-12-31 16:01:06 +0000] [1288] [INFO] Booting worker with pid: 1288
+[2025-12-31 17:04:53 +0000] [1160] [ERROR] Worker (pid:1194) was sent SIGKILL! Perhaps out of memory?
+[2025-12-31 17:04:53 +0000] [1363] [INFO] Booting worker with pid: 1363
+[2025-12-31 17:35:03 +0000] [1160] [INFO] Handling signal: hup
+--- Logging error ---
+[2025-12-31 17:35:03 +0000] [1160] [ERROR] Worker (pid:1288) was sent SIGHUP!
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/logging/__init__.py", line 1163, in emit
+    stream.write(msg + self.terminator)
+RuntimeError: reentrant call inside <_io.BufferedWriter name='<stderr>'>
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/usr/lib/python3.12/logging/__init__.py", line 1163, in emit
+    stream.write(msg + self.terminator)
+  File "/home/ubuntu/ExpenseTrackerDash/venv/lib/python3.12/site-packages/gunicorn/arbiter.py", line 241, in handle_chld
+    self.reap_workers()
+  File "/home/ubuntu/ExpenseTrackerDash/venv/lib/python3.12/site-packages/gunicorn/arbiter.py", line 553, in reap_workers
+    self.log.error(msg)
+  File "/home/ubuntu/ExpenseTrackerDash/venv/lib/python3.12/site-packages/gunicorn/glogging.py", line 271, in error
+    self.error_log.error(msg, *args, **kwargs)
+  File "/usr/lib/python3.12/logging/__init__.py", line 1568, in error
+    self._log(ERROR, msg, args, **kwargs)
+  File "/usr/lib/python3.12/logging/__init__.py", line 1684, in _log
+    self.handle(record)
+  File "/usr/lib/python3.12/logging/__init__.py", line 1700, in handle
+    self.callHandlers(record)
+  File "/usr/lib/python3.12/logging/__init__.py", line 1762, in callHandlers
+    hdlr.handle(record)
+  File "/usr/lib/python3.12/logging/__init__.py", line 1028, in handle
+    self.emit(record)
+  File "/usr/lib/python3.12/logging/__init__.py", line 1168, in emit
+    self.handleError(record)
+  File "/usr/lib/python3.12/logging/__init__.py", line 1081, in handleError
+    sys.stderr.write('--- Logging error ---\n')
+RuntimeError: reentrant call inside <_io.BufferedWriter name='<stderr>'>
+Call stack:
+  File "/home/ubuntu/ExpenseTrackerDash/venv/bin/gunicorn", line 7, in <module>
+    sys.exit(run())
+  File "/home/ubuntu/ExpenseTrackerDash/venv/lib/python3.12/site-packages/gunicorn/app/wsgiapp.py", line 66, in run
+    WSGIApplication("%(prog)s [OPTIONS] [APP_MODULE]", prog=prog).run()
+  File "/home/ubuntu/ExpenseTrackerDash/venv/lib/python3.12/site-packages/gunicorn/app/base.py", line 235, in run
+    super().run()
+  File "/home/ubuntu/ExpenseTrackerDash/venv/lib/python3.12/site-packages/gunicorn/app/base.py", line 71, in run
+    Arbiter(self).run()
+  File "/home/ubuntu/ExpenseTrackerDash/venv/lib/python3.12/site-packages/gunicorn/arbiter.py", line 222, in run
+    self.log.info("Handling signal: %s", signame)
+  File "/home/ubuntu/ExpenseTrackerDash/venv/lib/python3.12/site-packages/gunicorn/glogging.py", line 277, in info
+    self.error_log.info(msg, *args, **kwargs)
+Message: 'Handling signal: %s'
+Arguments: ('hup',)
+[2025-12-31 17:35:03 +0000] [1160] [INFO] Hang up: Master
+[2025-12-31 17:35:03 +0000] [1407] [INFO] Booting worker with pid: 1407
+[2025-12-31 17:35:03 +0000] [1408] [INFO] Booting worker with pid: 1408
+[2025-12-31 19:40:43 +0000] [1160] [ERROR] Worker (pid:1407) was sent SIGKILL! Perhaps out of memory?
+[2025-12-31 19:40:43 +0000] [1558] [INFO] Booting worker with pid: 1558
+[2025-12-31 20:12:47 +0000] [1160] [ERROR] Worker (pid:1408) was sent SIGKILL! Perhaps out of memory?
+[2025-12-31 20:12:47 +0000] [1638] [INFO] Booting worker with pid: 1638
+[2026-01-01 03:07:20 +0000] [1160] [ERROR] Worker (pid:1558) was sent SIGKILL! Perhaps out of memory?
+[2026-01-01 03:01:37 +0000] [1160] [CRITICAL] WORKER TIMEOUT (pid:1558)
+[2026-01-01 03:07:20 +0000] [2513] [INFO] Booting worker with pid: 2513
+[2026-01-01 03:45:19 +0000] [1160] [ERROR] Worker (pid:2513) was sent SIGKILL! Perhaps out of memory?
+[2026-01-01 03:45:19 +0000] [2916] [INFO] Booting worker with pid: 2916
+[2026-01-01 03:50:00 +0000] [1160] [CRITICAL] WORKER TIMEOUT (pid:1638)
+[2026-01-01 03:53:41 +0000] [1160] [ERROR] Worker (pid:1638) was sent SIGKILL! Perhaps out of memory?
+[2026-01-01 03:53:41 +0000] [2920] [INFO] Booting worker with pid: 2920
+[2026-01-01 07:40:23 +0000] [1160] [INFO] Handling signal: term
+[2026-01-01 07:40:23 +0000] [1160] [ERROR] Worker (pid:2916) was sent SIGHUP!
+[2026-01-01 07:40:23 +0000] [1160] [ERROR] Worker (pid:2920) was sent SIGHUP!
+[2026-01-01 07:40:23 +0000] [1160] [INFO] Shutting down: Master
